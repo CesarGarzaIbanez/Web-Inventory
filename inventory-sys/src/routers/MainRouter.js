@@ -13,8 +13,9 @@ export const MainRouter = () => {
                 <nav className="navbar">
                     <ul>
                         <li> <NavLink to="/actualizar">Añadir</NavLink></li>
-                        <li> <NavLink to="/tabla">Editar</NavLink></li>
+                        <li> <NavLink to="/tabla">Añadir usuario</NavLink></li>
                         <li><NavLink to="/tabla">Tabla</NavLink></li>
+                        <li><NavLink to="/tabla">Cerrar Sesión</NavLink></li>
                     </ul>
                 </nav>
             </header>

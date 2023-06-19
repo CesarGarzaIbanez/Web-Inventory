@@ -13,11 +13,15 @@
     display: grid;
     grid-template-areas:
         "categoria tipo"
+        "activocomp activomon"
         "marca modelo"
+        "cpu ram"
+        "almacenamiento disco"
+        "caracteristicas caracteristicas"
+        "caracteristicas caracteristicas"
         "serie activo"
-        "caracteristicas departamento"
-        "caracteristicas lugar"
-        "caracteristicas actualizar";
+        "departamento lugar"
+        "actualizar actualizar";
     grid-gap: 10px;
 
     max-width: auto;
@@ -114,4 +118,26 @@
 
 #caracteristicas {
     grid-area: caracteristicas;
+}
+
+#activo-computadora{
+    grid-area: activocomp;
+}
+#activo-monitor{
+    grid-area: activomon;
+}
+
+#cpu{
+    grid-area:cpu;
+}
+
+#ram{
+    grid-area:ram;
+}
+
+#almacenamiento{
+    grid-area: almacenamiento;
+}
+#disco{
+    grid-area: disco;
 }
