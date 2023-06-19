@@ -1,0 +1,117 @@
+.form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-form {
+    background-color: white;
+    align-items: center;
+    padding: 25px;
+    border-radius: 20px;
+
+    display: grid;
+    grid-template-areas:
+        "categoria tipo"
+        "marca modelo"
+        "serie activo"
+        "caracteristicas departamento"
+        "caracteristicas lugar"
+        "caracteristicas actualizar";
+    grid-gap: 10px;
+
+    max-width: auto;
+}
+
+.form-entry {
+    display: flex;
+    flex-direction: column;
+    font-size: 25px;
+     
+
+    select,input {
+        font-size: 20px;
+    }
+    select {
+        width: 185px;
+        background-color: #f9d8d8;
+        border: none;
+        border-radius: 8px;
+    }
+
+    input {
+        width: 180px;
+        background-color: #f9d8d8;
+        border: none;
+        border-radius: 8px;
+    }
+
+    label {
+        text-align: left;
+
+    }
+}
+
+.type-textarea {
+    textarea {
+        height: 120px;
+        width: 180px;
+        resize: none;
+        background-color: #f9d8d8;
+        border: none;
+        border-radius: 8px;
+    }
+}
+
+.update-button {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 8px;
+    font-size: 20px;
+
+    
+    &:hover{
+    border: 2px solid black;
+    background-color: #d77272;
+    }
+}
+
+#categoria {
+    grid-area: categoria;
+}
+
+#tipo {
+    grid-area: tipo;
+}
+
+#marca {
+    grid-area: marca;
+}
+
+#modelo {
+    grid-area: modelo;
+}
+
+#serie {
+    grid-area: serie;
+}
+
+#activo {
+    grid-area: activo;
+}
+
+#departamento {
+    grid-area: departamento;
+}
+
+#lugar {
+    grid-area: lugar;
+}
+
+#actualizar {
+    grid-area: actualizar;
+}
+
+#caracteristicas {
+    grid-area: caracteristicas;
+}

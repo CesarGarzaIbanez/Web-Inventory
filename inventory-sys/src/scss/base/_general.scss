@@ -1,0 +1,17 @@
+/* Generales */
+
+body{
+    background: #f2f2f2;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif, Arial, Helvetica;
+  
+  }
+  
+  .layout{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
