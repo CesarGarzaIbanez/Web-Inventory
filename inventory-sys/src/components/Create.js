@@ -3,19 +3,34 @@ import React, { useState } from 'react'
 export const Create = () => {
 
   const [category, setCategory] = useState('pc')
+  const [formValues, setFormValues] = useState({});
+
+  const getValue = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prevFormValues) => ({
+      ...prevFormValues,
+      [name]: value,
+    }));
+  };
 
   const changeForm = (e) => {
     const value = e.target.value;
     setCategory(value)
   }
 
-  console.log(category);
+
+  const print = (e) => {
+  e.preventDefault();
+  console.log(JSON.stringify(formValues));
+};
+
+
   return (
     <>
 
       <h2>{category.toUpperCase()}</h2>
       <div className='form-container'>
-        <form>
+        <form onSubmit={print}>
           <div className='create-form'>
 
 
@@ -33,19 +48,19 @@ export const Create = () => {
 
             <div id="tipo" className='form-entry type-input'>
               <label>Tipo</label>
-              <input type='text' placeholder='Tipo' />
+              <input type='text' placeholder='Tipo' onChange={getValue}/>
             </div>
 
             {category === 'pc' && (
               <>
                 <div id="activo-computadora" className='form-entry type-input'>
                   <label>Activo Computadora</label>
-                  <input type="text" placeholder='Activo Computadora' />
+                  <input type="text" placeholder='Activo Computadora'onChange={getValue} />
                 </div>
 
                 <div id="activo-monitor" className='form-entry type-input'>
                   <label>Activo Monitor</label>
-                  <input type="text" placeholder='Activo Monitor' />
+                  <input type="text" placeholder='Activo Monitor' onChange={getValue} />
                 </div>
               </>
             )}
@@ -54,36 +69,69 @@ export const Create = () => {
               <>
                 <div id="marca" className='form-entry type-input'>
                   <label>Marca</label>
-                  <input type='text' placeholder='Marca' />
+                  <input type='text' placeholder='Marca' onChange={getValue} />
                 </div>
 
                 <div id="modelo" className='form-entry type-input'>
                   <label>Modelo</label>
-                  <input type='text' placeholder='Modelo' />
+                  <input type='text' placeholder='Modelo' onChange={getValue}/>
                 </div>
               </>
             ) : null}
+
+            {category === 'impresoras' && (
+              <>
+                <div className='form-entry type-select'>
+                  <label>Tinta</label>
+                  <select onChange={getValue}>
+                    <option>Múltiple</option>
+                    <option>Única</option>
+                  </select>
+                </div>
+
+                <div className='form-entry type-input'>
+                  <label>C</label>
+                  <input type='text' placeholder='C' onChange={getValue}/>
+                </div>
+                <div className='form-entry type-input'>
+                  <label>M</label>
+                  <input type='text' placeholder='M' onChange={getValue}/>
+                </div>
+                <div className='form-entry type-input'>
+                  <label>Y</label>
+                  <input type='text' placeholder='Y' onChange={getValue}/>
+                </div>
+                <div className='form-entry type-input'>
+                  <label>K</label>
+                  <input type='text' placeholder='K' onChange={getValue}/>
+                </div>
+                <div className='form-entry type-input'>
+                  <label>CMYK</label>
+                  <input type='text' placeholder='C' onChange={getValue}/>
+                </div>
+              </>
+            )}
 
             {category === 'computadoras' && (
               <>
                 <div id="cpu" className='form-entry type-input'>
                   <label>CPU</label>
-                  <input type='text' placeholder='CPU' />
+                  <input type='text' placeholder='CPU'  onChange={getValue}/>
                 </div>
 
                 <div id="ram" className='form-entry type-input'>
                   <label>RAM</label>
-                  <input type='text' placeholder='RAM' />
+                  <input type='text' placeholder='RAM' onChange={getValue}/>
                 </div>
 
                 <div id="almacenamiento" className='form-entry type-input'>
                   <label>Almacenamiento</label>
-                  <input type='text' placeholder='Almacenamiento' />
+                  <input type='text' placeholder='Almacenamiento' onChange={getValue}/>
                 </div>
 
                 <div id="disco" className='form-entry type-input'>
                   <label>Disco</label>
-                  <input type='text' placeholder='Disco' />
+                  <input type='text' placeholder='Disco' onChange={getValue}/>
                 </div>
               </>
             )}
@@ -91,11 +139,11 @@ export const Create = () => {
               <>
                 <div id="teclado" className='form-entry type-textarea'>
                   <label>Teclado</label>
-                  <input type='text' placeholder='Teclado' />
+                  <input type='text' placeholder='Teclado' onChange={getValue}/>
                 </div>
                 <div id="mouse" className='form-entry type-textarea'>
                   <label>Mouse</label>
-                  <input type='text' placeholder='Mouse' />
+                  <input type='text' placeholder='Mouse' onChange={getValue}/>
                 </div>
               </>
             )}
@@ -103,7 +151,7 @@ export const Create = () => {
               <>
                 <div id="puerto" className='form-entry type-textarea'>
                   <label>Puerto</label>
-                  <input type='text' placeholder='Puerto' />
+                  <input type='text' placeholder='Puerto'onChange={getValue} />
                 </div>
               </>
             )}
@@ -112,7 +160,7 @@ export const Create = () => {
               <>
                 <div id="caracteristicas" className='form-entry type-textarea'>
                   <label>Características</label>
-                  <textarea></textarea>
+                  <textarea onChange={getValue}></textarea>
                 </div>
               </>
             ) : null}
@@ -121,12 +169,12 @@ export const Create = () => {
               <>
                 <div id="serie" className='form-entry type-input'>
                   <label>Serie</label>
-                  <input type='text' placeholder='Serie' />
+                  <input type='text' placeholder='Serie' onChange={getValue}/>
                 </div>
 
                 <div id="activo" className='form-entry type-input'>
                   <label>Activo</label>
-                  <input type='text' placeholder='Activo' />
+                  <input type='text' placeholder='Activo' onChange={getValue}/>
                 </div>
               </>
             ) : null}
@@ -134,7 +182,7 @@ export const Create = () => {
 
             <div id="departamento" className='form-entry type-select'>
               <label>Departamento</label>
-              <select>
+              <select onChange={getValue}>
                 <option value="acopio">Acopio</option>
                 <option value="acopio entregado">Acopio Entregado</option>
                 <option value="antenas">Antenas</option>
@@ -161,7 +209,7 @@ export const Create = () => {
 
             <div id="lugar" className='form-entry type-select'>
               <label>Lugar</label>
-              <select>
+              <select onChange={getValue}>
                 <option>Aula 1</option>
                 <option>Aula 2</option>
               </select>

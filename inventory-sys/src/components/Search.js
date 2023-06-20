@@ -136,6 +136,7 @@ export const Search = ({ setColumnsState, setTableState, setDataState, deptData 
                             <option value="m">M</option>
                             <option value="y">Y</option>
                             <option value="k">K</option>
+                            <option value="cmyk">CMYK</option>
 
                         </>
                     )}
