@@ -11,26 +11,15 @@
     border-radius: 20px;
 
     display: grid;
-    grid-template-areas:
-        "categoria tipo"
-        "activocomp activomon"
-        "marca modelo"
-        "cpu ram"
-        "almacenamiento disco"
-        "caracteristicas caracteristicas"
-        "caracteristicas caracteristicas"
-        "serie activo"
-        "departamento lugar"
-        "actualizar actualizar";
+    grid-template-columns: repeat(2,1fr);
     grid-gap: 10px;
-
     max-width: auto;
 }
 
 .form-entry {
     display: flex;
     flex-direction: column;
-    font-size: 25px;
+    font-size: 20px;
      
 
     select,input {
@@ -59,7 +48,7 @@
 .type-textarea {
     textarea {
         height: 120px;
-        width: 180px;
+        width: 380px;
         resize: none;
         background-color: #f9d8d8;
         border: none;
@@ -72,6 +61,7 @@
     border: 1px solid black;
     border-radius: 8px;
     font-size: 20px;
+    margin-top: 30px;
 
     
     &:hover{
@@ -80,64 +70,12 @@
     }
 }
 
-#categoria {
-    grid-area: categoria;
+#caracteristicas, #puerto {
+    grid-column: span 2;
+
+    input{
+        width: 380px;
+    }
 }
 
-#tipo {
-    grid-area: tipo;
-}
 
-#marca {
-    grid-area: marca;
-}
-
-#modelo {
-    grid-area: modelo;
-}
-
-#serie {
-    grid-area: serie;
-}
-
-#activo {
-    grid-area: activo;
-}
-
-#departamento {
-    grid-area: departamento;
-}
-
-#lugar {
-    grid-area: lugar;
-}
-
-#actualizar {
-    grid-area: actualizar;
-}
-
-#caracteristicas {
-    grid-area: caracteristicas;
-}
-
-#activo-computadora{
-    grid-area: activocomp;
-}
-#activo-monitor{
-    grid-area: activomon;
-}
-
-#cpu{
-    grid-area:cpu;
-}
-
-#ram{
-    grid-area:ram;
-}
-
-#almacenamiento{
-    grid-area: almacenamiento;
-}
-#disco{
-    grid-area: disco;
-}

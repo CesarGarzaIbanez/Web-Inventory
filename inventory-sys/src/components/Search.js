@@ -6,9 +6,9 @@ export const Search = ({ setColumnsState, setTableState, setDataState, deptData 
     const [columnName, setColumnName] = useState('tipo')
     const [search, setSearch] = useState('');
 
-    useEffect(()=>{
+    useEffect(() => {
         filterData(search);
-    }, [columnName,search]);
+    }, [columnName, search]);
 
     // Leer el evento de cambio de tipo de tabla que se necesita
     const changeTable = (e) => {
@@ -31,26 +31,31 @@ export const Search = ({ setColumnsState, setTableState, setDataState, deptData 
             case 'monitores':
                 setColumnsState(columns[2]);
                 break;
-            case 'accesspoint':
+            case 'impresoras':
                 setColumnsState(columns[3]);
                 break;
-            case 'general':
+            case 'accesspoint':
                 setColumnsState(columns[4]);
+                break;
+            case 'general':
+                setColumnsState(columns[5]);
                 break;
             default:
                 setColumnsState(columns[0]);
                 break;
         }
 
-
     }
 
-    const filterData = (search) =>{
+    // Filtrar los datos segun la entrada dentro de la barra de busqueda
+
+    const filterData = (search) => {
         if (deptData.some(item => item[columnName])) {
-            setDataState(deptData.filter(item => item[columnName].toLowerCase().includes(search)))
-         }
+            setDataState(deptData.filter(item => item[columnName].toLowerCase().includes(search.toLowerCase())))
+        }
     }
 
+    // Establecer la columna con la que se va a trabajar
     const columnFilter = (e) => {
         setColumnName(e.target.value);
     }
@@ -74,6 +79,7 @@ export const Search = ({ setColumnsState, setTableState, setDataState, deptData 
                     <option value='pc'>PC</option>
                     <option value='computadoras'>Computadoras</option>
                     <option value='monitores'>Monitores</option>
+                    <option value='impresoras'>Impresoras</option>
                     <option value='accesspoint'>Access Point</option>
                     <option value='general'>General</option>
                 </select>
@@ -122,6 +128,17 @@ export const Search = ({ setColumnsState, setTableState, setDataState, deptData 
                             <option value="marca">Marca</option>
                             <option value="modelo">Modelo</option>
                         </>) : null}
+
+                    {tableName === 'impresoras' && (
+                        <>
+                            <option value="tinta">Tinta</option>
+                            <option value="c">C</option>
+                            <option value="m">M</option>
+                            <option value="y">Y</option>
+                            <option value="k">K</option>
+
+                        </>
+                    )}
                     {tableName === 'computadoras' ? (
                         <>
                             <option value="cpu">CPU</option>
