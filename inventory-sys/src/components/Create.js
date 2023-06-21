@@ -63,7 +63,7 @@ export const Create = () => {
 
   }
 
-  const print = (e) => {
+  const submitForm = (e) => {
     e.preventDefault();
     let data = e.target;
     let formValues = defineDataStructure(data)
@@ -77,7 +77,7 @@ export const Create = () => {
 
       <h2>{category.toUpperCase()}</h2>
       <div className='form-container'>
-        <form onSubmit={print}>
+        <form onSubmit={submitForm}>
           <div className='create-form'>
 
 
