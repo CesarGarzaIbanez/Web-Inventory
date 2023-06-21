@@ -69,8 +69,6 @@ export const Create = () => {
     let formValues = defineDataStructure(data)
     console.log(formValues);
     setFormValues(formValues);
-
-
   };
 
 
