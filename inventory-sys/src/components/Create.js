@@ -5,24 +5,73 @@ export const Create = () => {
   const [category, setCategory] = useState('pc')
   const [formValues, setFormValues] = useState({});
 
-  const getValue = (e) => {
-    const { name, value } = e.target;
-    setFormValues((prevFormValues) => ({
-      ...prevFormValues,
-      [name]: value,
-    }));
-  };
 
   const changeForm = (e) => {
     const value = e.target.value;
     setCategory(value)
   }
 
+  const defineDataStructure = (data) => {
+    let formValues = {
+      categoria: data.categoria.value,
+      tipo: data.tipo.value,
+      departamento: data.departamento.value,
+      lugar: data.lugar.value,
+    }
+
+    if (category != 'pc'){
+      formValues.marca = data.marca.value;
+      formValues.modelo = data.modelo.value;
+      formValues.serie = data.serie.value;
+      formValues.activo = data.activo.value;
+    }
+
+    if(category === 'monitores' || category === 'general'){
+      formValues.caracteristicas = data.caracteristicas.value;
+    }
+
+    switch (category) {
+      case 'pc':
+        formValues.activoComputadora = data.activoComputadora.value
+        formValues.activoMonitor = data.activoMonitor.value
+        break;
+      case 'impresoras':
+        formValues.tinta = data.tinta.value;
+        formValues.c = data.c.value;
+        formValues.m = data.m.value;
+        formValues.y = data.y.value;
+        formValues.k = data.k.value;
+        formValues.cmyk = data.cmyk.value;
+        break;
+      case 'computadoras':
+        formValues.cpu = data.cpu.value;
+        formValues.ram = data.ram.value;
+        formValues.almacenamiento = data.almacenamiento.value;
+        formValues.disco = data.disco.value;
+        break;
+      case 'monitores':
+        formValues.teclado = data.teclado.value;
+        formValues.mouse = data.mouse.value;
+        break;
+      case 'accesspoint':
+        formValues.puerto = data.puerto.value;
+      default:
+        break;
+    }
+
+    return formValues
+
+  }
 
   const print = (e) => {
-  e.preventDefault();
-  console.log(JSON.stringify(formValues));
-};
+    e.preventDefault();
+    let data = e.target;
+    let formValues = defineDataStructure(data)
+    console.log(formValues);
+    setFormValues(formValues);
+
+
+  };
 
 
   return (
@@ -36,7 +85,7 @@ export const Create = () => {
 
             <div id='categoria' className='form-entry type-select'>
               <label>Categoría</label>
-              <select onChange={changeForm}>
+              <select name='categoria' onChange={changeForm}>
                 <option value='pc'>PC</option>
                 <option value='computadoras'>Computadoras</option>
                 <option value='monitores'>Monitores</option>
@@ -48,19 +97,19 @@ export const Create = () => {
 
             <div id="tipo" className='form-entry type-input'>
               <label>Tipo</label>
-              <input type='text' placeholder='Tipo' onChange={getValue}/>
+              <input name='tipo' type='text' placeholder='Tipo' />
             </div>
 
             {category === 'pc' && (
               <>
                 <div id="activo-computadora" className='form-entry type-input'>
                   <label>Activo Computadora</label>
-                  <input type="text" placeholder='Activo Computadora'onChange={getValue} />
+                  <input name='activoComputadora' type="text" placeholder='Activo Computadora' />
                 </div>
 
-                <div id="activo-monitor" className='form-entry type-input'>
+                <div id="activo-monitor" className='form-entry type-input' >
                   <label>Activo Monitor</label>
-                  <input type="text" placeholder='Activo Monitor' onChange={getValue} />
+                  <input name='activoMonitor' type="text" placeholder='Activo Monitor' />
                 </div>
               </>
             )}
@@ -69,12 +118,12 @@ export const Create = () => {
               <>
                 <div id="marca" className='form-entry type-input'>
                   <label>Marca</label>
-                  <input type='text' placeholder='Marca' onChange={getValue} />
+                  <input name='marca' type='text' placeholder='Marca' />
                 </div>
 
                 <div id="modelo" className='form-entry type-input'>
                   <label>Modelo</label>
-                  <input type='text' placeholder='Modelo' onChange={getValue}/>
+                  <input name='modelo' type='text' placeholder='Modelo' />
                 </div>
               </>
             ) : null}
@@ -83,7 +132,7 @@ export const Create = () => {
               <>
                 <div className='form-entry type-select'>
                   <label>Tinta</label>
-                  <select onChange={getValue}>
+                  <select name='tinta'>
                     <option>Múltiple</option>
                     <option>Única</option>
                   </select>
@@ -91,23 +140,23 @@ export const Create = () => {
 
                 <div className='form-entry type-input'>
                   <label>C</label>
-                  <input type='text' placeholder='C' onChange={getValue}/>
+                  <input name='c' type='text' placeholder='C' />
                 </div>
                 <div className='form-entry type-input'>
                   <label>M</label>
-                  <input type='text' placeholder='M' onChange={getValue}/>
+                  <input name='m' type='text' placeholder='M' />
                 </div>
                 <div className='form-entry type-input'>
                   <label>Y</label>
-                  <input type='text' placeholder='Y' onChange={getValue}/>
+                  <input name='y' type='text' placeholder='Y' />
                 </div>
                 <div className='form-entry type-input'>
                   <label>K</label>
-                  <input type='text' placeholder='K' onChange={getValue}/>
+                  <input name='k' type='text' placeholder='K' />
                 </div>
                 <div className='form-entry type-input'>
                   <label>CMYK</label>
-                  <input type='text' placeholder='C' onChange={getValue}/>
+                  <input name='cmyk' type='text' placeholder='C' />
                 </div>
               </>
             )}
@@ -116,22 +165,22 @@ export const Create = () => {
               <>
                 <div id="cpu" className='form-entry type-input'>
                   <label>CPU</label>
-                  <input type='text' placeholder='CPU'  onChange={getValue}/>
+                  <input name='cpu' type='text' placeholder='CPU' />
                 </div>
 
                 <div id="ram" className='form-entry type-input'>
                   <label>RAM</label>
-                  <input type='text' placeholder='RAM' onChange={getValue}/>
+                  <input name='ram' type='text' placeholder='RAM' />
                 </div>
 
                 <div id="almacenamiento" className='form-entry type-input'>
                   <label>Almacenamiento</label>
-                  <input type='text' placeholder='Almacenamiento' onChange={getValue}/>
+                  <input name='almacenamiento' type='text' placeholder='Almacenamiento' />
                 </div>
 
                 <div id="disco" className='form-entry type-input'>
                   <label>Disco</label>
-                  <input type='text' placeholder='Disco' onChange={getValue}/>
+                  <input name='disco' type='text' placeholder='Disco' />
                 </div>
               </>
             )}
@@ -139,11 +188,11 @@ export const Create = () => {
               <>
                 <div id="teclado" className='form-entry type-textarea'>
                   <label>Teclado</label>
-                  <input type='text' placeholder='Teclado' onChange={getValue}/>
+                  <input name='teclado' type='text' placeholder='Teclado' />
                 </div>
                 <div id="mouse" className='form-entry type-textarea'>
                   <label>Mouse</label>
-                  <input type='text' placeholder='Mouse' onChange={getValue}/>
+                  <input name='mouse' type='text' placeholder='Mouse' />
                 </div>
               </>
             )}
@@ -151,7 +200,7 @@ export const Create = () => {
               <>
                 <div id="puerto" className='form-entry type-textarea'>
                   <label>Puerto</label>
-                  <input type='text' placeholder='Puerto'onChange={getValue} />
+                  <input name='puerto' type='text' placeholder='Puerto' />
                 </div>
               </>
             )}
@@ -160,7 +209,7 @@ export const Create = () => {
               <>
                 <div id="caracteristicas" className='form-entry type-textarea'>
                   <label>Características</label>
-                  <textarea onChange={getValue}></textarea>
+                  <textarea name='caracteristicas'></textarea>
                 </div>
               </>
             ) : null}
@@ -169,12 +218,12 @@ export const Create = () => {
               <>
                 <div id="serie" className='form-entry type-input'>
                   <label>Serie</label>
-                  <input type='text' placeholder='Serie' onChange={getValue}/>
+                  <input name='serie' type='text' placeholder='Serie' />
                 </div>
 
                 <div id="activo" className='form-entry type-input'>
                   <label>Activo</label>
-                  <input type='text' placeholder='Activo' onChange={getValue}/>
+                  <input name='activo' type='text' placeholder='Activo' />
                 </div>
               </>
             ) : null}
@@ -182,7 +231,7 @@ export const Create = () => {
 
             <div id="departamento" className='form-entry type-select'>
               <label>Departamento</label>
-              <select onChange={getValue}>
+              <select name='departamento'>
                 <option value="acopio">Acopio</option>
                 <option value="acopio entregado">Acopio Entregado</option>
                 <option value="antenas">Antenas</option>
@@ -209,7 +258,7 @@ export const Create = () => {
 
             <div id="lugar" className='form-entry type-select'>
               <label>Lugar</label>
-              <select onChange={getValue}>
+              <select name='lugar'>
                 <option>Aula 1</option>
                 <option>Aula 2</option>
               </select>
