@@ -4,14 +4,15 @@ import { Create } from '../components/Create'
 import { Table } from '../components/Table'
 import { CreateUser } from '../components/CreateUser'
 import {Users} from '../components/Users'
+import DTIsvg from '../helpers/DTIsvg';
+
 
 
 export const MainRouter = () => {
     return (
         <BrowserRouter>
             <header className="header">
-                <h1>Nombre de la App</h1>
-
+                <DTIsvg/>
                 <nav className="navbar">
                     <ul>
                         <li> <NavLink to="/actualizar">Añadir</NavLink></li>

@@ -1,0 +1,24 @@
+.dataTable,
+.userTable {
+    border-radius: 12px !important;
+
+
+}
+
+.container-padre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userTable-container {
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-self: center;
+    h2{
+        font-size: 30px;
+    }
+}
+

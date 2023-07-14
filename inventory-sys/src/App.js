@@ -7,9 +7,6 @@ function App() {
 
       <MainRouter></MainRouter>
 
-      <footer className="footer">
-        &copy; Todos los derechos reservados.
-      </footer>
     </div>
   );
 }

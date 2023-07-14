@@ -1,10 +1,12 @@
 // Base
 
 @import 'base/general';
+@import 'base/variables';
 
 // Layout
 @import 'layout/header';
 @import 'layout/search';
 @import 'layout/scanner';
 @import 'layout/create';
-@import 'layout/userForm'
+@import 'layout/userForm';
+@import 'layout/tables';

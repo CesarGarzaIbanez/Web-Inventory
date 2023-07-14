@@ -16,7 +16,56 @@ export const Table = () => {
     setSelectedData(state);
   };
 
-console.log(selectedData);
+  const customStyles = {
+
+    table: {
+      style: {
+        backgroundColor: 'transparent',
+      }
+    },
+    headCells: {
+      style: {
+        backgroundColor: '#0B2242',
+        color: 'white',
+        fontSize: '18px',
+        justifyContent: 'center',
+      },
+    },
+
+    cells: {
+      style: {
+        justifyContent: 'center',
+        marginRight: '20px',
+      }
+    },
+
+    rows: {
+      style: {
+        backgroundColor: 'rgba(237, 237, 237, 0.8)',
+        borderStyle: 'none !important',
+        borderWidth: 'none !important',
+        borderColor: 'none !important',
+      },
+      stripedStyle: {
+        backgroundColor: 'transparent',
+        borderStyle: 'none !important',
+        borderWidth: 'none !important',
+        borderColor: 'none !important',
+      },
+    },
+
+    pagination: {
+      style: {
+        backgroundColor: 'transparent',
+        borderStyle: 'none !important',
+        borderWidth: 'none !important',
+        borderColor: 'none !important',
+      }
+    },
+
+  };
+
+  console.log(selectedData);
 
 
 
@@ -35,14 +84,14 @@ console.log(selectedData);
 
 
       <DataTable
-        title={tableState}
         fixedHeader
         className='dataTable'
         columns={columnsState}
         data={dataState}
         onRowClicked={handleChange}
-
+        customStyles={customStyles}
         pagination
+        striped
       />
     </div>
   )
