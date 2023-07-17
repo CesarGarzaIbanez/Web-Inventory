@@ -5,10 +5,34 @@ import { Table } from '../components/Table'
 import { CreateUser } from '../components/CreateUser'
 import {Users} from '../components/Users'
 import DTIsvg from '../helpers/DTIsvg';
+import { useEffect, useState } from "react";
+
 
 
 
 export const MainRouter = () => {
+
+    const [computadoras, setComputadoras] = useState([]);
+
+    useEffect(() => {
+      getComputadoras();
+    }, []);
+  
+    const getComputadoras = async () => {
+      try {
+        const response = await fetch('https://localhost:7271/api/Computadoras', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        const data = await response.json();
+        setComputadoras(data);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  
     return (
         <BrowserRouter>
             <header className="header">
@@ -31,8 +55,8 @@ export const MainRouter = () => {
                     <Route path='/actualizar' element={<Create />} />
                     <Route path='/anadir-usuario' element={<CreateUser />} />
                     <Route path='/usuarios' element={<Users />} />
-                    <Route path='/tabla' element={<Table />} />
-                    <Route path='*' element={<Table />} />
+                    <Route path='/tabla' element={<Table computadoras={computadoras} />} />
+                    <Route path='*' element={<Table computadoras={computadoras} />} />
                 </Routes>
             </main>
 

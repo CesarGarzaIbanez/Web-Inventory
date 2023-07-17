@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="layout">
 
-      <MainRouter></MainRouter>
+      <MainRouter />
 
     </div>
   );

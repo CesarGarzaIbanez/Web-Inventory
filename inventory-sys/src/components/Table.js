@@ -4,13 +4,18 @@ import { columns, data } from '../helpers/tables.js'
 import { useState } from "react";
 import { Search } from './Search.js';
 
-export const Table = () => {
+export const Table = ({computadoras}) => {
 
+  const hola=Object.values(computadoras);
+  console.log(hola)
   const [columnsState, setColumnsState] = useState(columns[0])
   const [tableState, setTableState] = useState('PC');
   const [deptData, setDeptData] = useState(data);
   const [dataState, setDataState] = useState(deptData);
+  // Seleccionar al dar click en la fila
   const [selectedData, setSelectedData] = useState();
+
+  console.log(dataState)
 
   const handleChange = (state) => {
     setSelectedData(state);
