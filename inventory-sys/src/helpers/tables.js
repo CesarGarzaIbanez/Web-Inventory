@@ -1,6 +1,6 @@
 // Columnas de PC/Laptop
 
-// https://stackoverflow.com/questions/69369969/react-datatable-customization
+
 const pc = [
     {
         name: 'Tipo',
@@ -85,8 +85,8 @@ const computadoras = [
         sortable: true,
     },
     {
-        name: 'Lugar',
-        selector: row => row.lugar,
+        name: 'Area',
+        selector: row => row.area,
         sortable: true,
     },
 ];
@@ -116,6 +116,7 @@ let data = [
         activo: '12312321',
         departamento: 'DTI',
         lugar: 'Oficina',
+        
     },
     {
         tipo: 'PC',

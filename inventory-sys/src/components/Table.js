@@ -4,10 +4,14 @@ import { columns, data } from '../helpers/tables.js'
 import { useState } from "react";
 import { Search } from './Search.js';
 
-export const Table = ({computadoras}) => {
+export const Table = ({ computadoras }) => {
 
-  const hola=Object.values(computadoras);
-  console.log(hola)
+  let newData;
+  // console.log(computadoras)
+  if(computadoras){
+    newData = computadoras.map(({ departamento: { nombre: departamento }, ...rest }) => ({ ...rest, departamento }));
+  }
+
   const [columnsState, setColumnsState] = useState(columns[0])
   const [tableState, setTableState] = useState('PC');
   const [deptData, setDeptData] = useState(data);
@@ -15,7 +19,7 @@ export const Table = ({computadoras}) => {
   // Seleccionar al dar click en la fila
   const [selectedData, setSelectedData] = useState();
 
-  console.log(dataState)
+  // console.log(dataState)
 
   const handleChange = (state) => {
     setSelectedData(state);
@@ -70,7 +74,7 @@ export const Table = ({computadoras}) => {
 
   };
 
-  console.log(selectedData);
+  // console.log(selectedData);
 
 
 
@@ -92,7 +96,7 @@ export const Table = ({computadoras}) => {
         fixedHeader
         className='dataTable'
         columns={columnsState}
-        data={dataState}
+        data={newData}
         onRowClicked={handleChange}
         customStyles={customStyles}
         pagination

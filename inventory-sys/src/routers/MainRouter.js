@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 
 export const MainRouter = () => {
 
-    const [computadoras, setComputadoras] = useState([]);
+    const [computadoras, setComputadoras] = useState();
 
     useEffect(() => {
       getComputadoras();
@@ -32,6 +32,8 @@ export const MainRouter = () => {
         console.log(error)
       }
     }
+
+
   
     return (
         <BrowserRouter>
