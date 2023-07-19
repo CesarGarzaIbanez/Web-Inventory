@@ -9,13 +9,13 @@ const pc = [
     },
     {
         name: 'Activo Computadora',
-        selector: row => row.activoComputadora,
+        selector: row => row.activoComp,
         sortable: true,
 
     },
     {
         name: 'Activo Monitor',
-        selector: row => row.activoMonitor,
+        selector: row => row.activoMon,
         sortable: true,
 
     },
@@ -25,8 +25,8 @@ const pc = [
         sortable: true,
     },
     {
-        name: 'Lugar',
-        selector: row => row.lugar,
+        name: 'Area',
+        selector: row => row.area,
         sortable: true,
     },
 ];
@@ -428,8 +428,8 @@ const general = [
         sortable: true,
     },
     {
-        name: 'Lugar',
-        selector: row => row.lugar,
+        name: 'Area',
+        selector: row => row.area,
         sortable: true,
     },
 ]
@@ -453,16 +453,6 @@ const monitores = [
         sortable: true,
     },
     {
-        name: 'Teclado',
-        selector: row => row.teclado,
-        sortable: true,
-    },
-    {
-        name: 'Mouse',
-        selector: row => row.mouse,
-        sortable: true,
-    },
-    {
         name: 'Caracteristicas',
         selector: row => row.caracteristicas,
         sortable: true,
@@ -483,8 +473,8 @@ const monitores = [
         sortable: true,
     },
     {
-        name: 'Lugar',
-        selector: row => row.lugar,
+        name: 'Area',
+        selector: row => row.area,
         sortable: true,
     },
 ]
@@ -526,8 +516,8 @@ const accessPoint = [
         sortable: true,
     },
     {
-        name: 'Lugar',
-        selector: row => row.lugar,
+        name: 'Area',
+        selector: row => row.area,
         sortable: true,
     },
 ]
@@ -594,8 +584,8 @@ const impresoras = [
         sortable: true,
     },
     {
-        name: 'Lugar',
-        selector: row => row.lugar,
+        name: 'Area',
+        selector: row => row.area,
         sortable: true,
     },
 ]

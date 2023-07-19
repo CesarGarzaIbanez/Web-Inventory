@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { columns, data } from '../helpers/tables.js'
 
-export const Search = ({ setColumnsState, setTableState, setDataState, deptData }) => {
+export const Search = ({ setColumnsState, setTableState, setDataState, setShownData, deptData, dataState, departamentos }) => {
     const [tableName, setTableName] = useState('pc')
     const [columnName, setColumnName] = useState('tipo')
     const [search, setSearch] = useState('');
+    const [departamentoState, setDepartamentoState] = useState('departamentos');
 
     useEffect(() => {
         filterData(search);
-    }, [columnName, search]);
+        filterDepto(departamentoState);
+    }, [columnName, search, departamentoState]);
+
+
+
 
     // Leer el evento de cambio de tipo de tabla que se necesita
     const changeTable = (e) => {
@@ -51,25 +56,28 @@ export const Search = ({ setColumnsState, setTableState, setDataState, deptData 
 
     const filterData = (search) => {
         if (deptData.some(item => item[columnName])) {
-            setDataState(deptData.filter(item => item[columnName].toLowerCase().includes(search.toLowerCase())))
+            setDataState(deptData.filter(item => item[columnName].toString().toLowerCase().includes(search.toLowerCase())))
         }
-    }
+        // console.log(dataState)
 
+    }
+    const filterDepto = (depto) => {
+        setDataState(deptData.filter(item => item['departamento'].toLowerCase() == (depto.toLowerCase())))
+    }
     // Establecer la columna con la que se va a trabajar
     const columnFilter = (e) => {
         setColumnName(e.target.value);
     }
 
+    // Leer el evento del buscador
     const searchFilter = (e) => {
         setSearch(e.target.value);
-
-        filterData(search);
     }
 
     const changeDept = (e) => {
         console.log(e.target.value);
+        setDepartamentoState(e.target.value);
     }
-
     return (
         <>
 
@@ -88,27 +96,11 @@ export const Search = ({ setColumnsState, setTableState, setDataState, deptData 
 
                 <select onChange={changeDept} className='loc-list'>
                     <option value='departamentos'>Todos los departamentos</option>
-                    <option value="acopio">Acopio</option>
-                    <option value="acopio entregado">Acopio Entregado</option>
-                    <option value="antenas">Antenas</option>
-                    <option value="auditorio">Auditorio</option>
-                    <option value="aulas">Aulas</option>
-                    <option value="biblioteca">Biblioteca</option>
-                    <option value="caadi">CAADI</option>
-                    <option value="centro de computo (M2)">Centro de Cómputo (M2)</option>
-                    <option value="cie">CIE</option>
-                    <option value="contrapunto">Contrapunto</option>
-                    <option value="cubiculos">Cubículos</option>
-                    <option value="deportes">Deportes</option>
-                    <option value="direccion">Dirección</option>
-                    <option value="dti">DTI</option>
-                    <option value="equipo portatil">Equipo Portátil</option>
-                    <option value="multimedia 1">Multimedia 1</option>
-                    <option value="multimedia 3">Multimedia 3</option>
-                    <option value="posgrado">Posgrado</option>
-                    <option value="sala de maestros">Sala de Maestros</option>
-                    <option value="sociedad de alumnos">Sociedad de Alumnos</option>
-                    <option value="site">SITE</option>
+                    {departamentos.map((dept) => (
+                        <option key={dept.departamentoId} value={dept.nombre}>
+                            {dept.nombre}
+                        </option>
+                    ))}
                 </select>
             </div>
 
@@ -167,7 +159,7 @@ export const Search = ({ setColumnsState, setTableState, setDataState, deptData 
                             <option value="activo">Activo</option>
                         </>) : null}
 
-                    <option value="lugar">Lugar</option>
+                    <option value="area">Area</option>
                 </select>
 
 

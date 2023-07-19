@@ -1,30 +1,66 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import DataTable from 'react-data-table-component'
 import { columns, data } from '../helpers/tables.js'
 import { useState } from "react";
 import { Search } from './Search.js';
 
-export const Table = ({ computadoras }) => {
-
-  let newData;
-  // console.log(computadoras)
-  if(computadoras){
-    newData = computadoras.map(({ departamento: { nombre: departamento }, ...rest }) => ({ ...rest, departamento }));
-  }
+export const Table = ({ computadoras, accesspoints, monitores, impresoras, generales, equipos, departamentos }) => {
 
   const [columnsState, setColumnsState] = useState(columns[0])
   const [tableState, setTableState] = useState('PC');
-  const [deptData, setDeptData] = useState(data);
+  const [deptData, setDeptData] = useState([]);
   const [dataState, setDataState] = useState(deptData);
+  const [shownData, setShownData] = useState(dataState);
   // Seleccionar al dar click en la fila
   const [selectedData, setSelectedData] = useState();
 
-  // console.log(dataState)
+
+  useEffect(() => {
+    setDataState(deptData)
+    setShownData(dataState)
+    changeTableData();
+  }, [tableState,deptData,dataState]);
+  // Escuchar por los cambios dentro de los padres 
+
+  if (equipos && !deptData) {
+    setDeptData(equipos)
+  }
+  
+  const changeTableData = () => {
+    switch (tableState) {
+      case "PC":
+        setDeptData(equipos);
+        break;
+      case "COMPUTADORAS":
+        setDeptData(computadoras);
+        break;
+      case "ACCESSPOINT":
+        setDeptData(accesspoints);
+        break;
+      case 'GENERAL':
+        setDeptData(generales);
+        break;
+      case 'IMPRESORAS':
+        setDeptData(impresoras);
+        break;
+      case 'MONITORES':
+        setDeptData(monitores);
+        break;
+      default:
+        break;
+    }
+  }
+
+
+
+
 
   const handleChange = (state) => {
     setSelectedData(state);
+    console.log(selectedData)
   };
 
+  // Estilos de la tabla
   const customStyles = {
 
     table: {
@@ -87,7 +123,10 @@ export const Table = ({ computadoras }) => {
           setTableState={setTableState}
           setDataState={setDataState}
           setDeptData={setDeptData}
+          setShownData={setShownData}
           deptData={deptData}
+          dataState={dataState}
+          departamentos={departamentos}
         />
       </section>
 
@@ -96,7 +135,7 @@ export const Table = ({ computadoras }) => {
         fixedHeader
         className='dataTable'
         columns={columnsState}
-        data={newData}
+        data={shownData}
         onRowClicked={handleChange}
         customStyles={customStyles}
         pagination
