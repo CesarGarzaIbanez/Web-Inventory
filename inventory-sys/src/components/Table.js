@@ -3,6 +3,8 @@ import DataTable from 'react-data-table-component'
 import { columns } from '../helpers/tables.js'
 import { useState } from "react";
 import { Search } from './Search.js';
+import { ViewData } from './ViewData.js';
+
 
 export const Table = ({ computadoras, accesspoints, monitores, impresoras, generales, equipos, departamentos }) => {
 
@@ -10,6 +12,7 @@ export const Table = ({ computadoras, accesspoints, monitores, impresoras, gener
   const [tableState, setTableState] = useState('EQUIPO');
   const [deptData, setDeptData] = useState([]);
   const [dataState, setDataState] = useState(deptData);
+  const [viewData,setViewData] = useState(false);
   // Seleccionar al dar click en la fila
   const [selectedData, setSelectedData] = useState();
 
@@ -24,6 +27,7 @@ export const Table = ({ computadoras, accesspoints, monitores, impresoras, gener
     setDeptData(equipos)
   }
   
+  // Cambiar los datos que se muestran
   const changeTableData = () => {
     switch (tableState) {
       case "EQUIPO":
@@ -49,13 +53,9 @@ export const Table = ({ computadoras, accesspoints, monitores, impresoras, gener
     }
   }
 
-
-
-
-
-  const handleChange = (state) => {
+  const toggleViewData = (state) => {
     setSelectedData(state);
-    console.log(selectedData)
+    setViewData(!viewData);
   };
 
   // Estilos de la tabla
@@ -108,13 +108,14 @@ export const Table = ({ computadoras, accesspoints, monitores, impresoras, gener
 
   };
 
-  // console.log(selectedData);
-
-
-
   return (
 
     <div>
+      {viewData && <ViewData
+      setViewData={setViewData}
+      selectedData={selectedData}
+      departamentos={departamentos}/>}
+
       <section className="searchBar">
         <Search
           setColumnsState={setColumnsState}
@@ -127,17 +128,19 @@ export const Table = ({ computadoras, accesspoints, monitores, impresoras, gener
         />
       </section>
 
+      
 
       <DataTable
         fixedHeader
         className='dataTable'
         columns={columnsState}
         data={dataState}
-        onRowClicked={handleChange}
+        onRowClicked={toggleViewData}
         customStyles={customStyles}
         pagination
         striped
       />
+
     </div>
   )
 }

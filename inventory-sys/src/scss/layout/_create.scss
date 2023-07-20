@@ -65,9 +65,10 @@
     margin-top: 30px;
     font-weight: bold;
     padding: 2px 12px;
+    width: 120px;
 
     &:hover{
-    border: 2px solid black;
+    transition: 0.3s;
     color: $blanco;
     background-color: $colorPrincipal;
     }
