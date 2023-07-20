@@ -87,27 +87,27 @@ export const ViewData = ({ setViewData, selectedData, departamentos }) => {
                                         <div className='form-entry view-data-entry'>
                                             <label>C</label>
                                             <input name='c' type='date' placeholder='C'
-                                            defaultValue={selectedData.c} />
+                                                defaultValue={selectedData.c} />
                                         </div>
                                         <div className='form-entry view-data-entry'>
                                             <label>M</label>
                                             <input name='m' type='date' placeholder='M'
-                                            defaultValue={selectedData.m} />
+                                                defaultValue={selectedData.m} />
                                         </div>
                                         <div className='form-entry view-data-entry'>
                                             <label>Y</label>
                                             <input name='y' type='date' placeholder='Y'
-                                            defaultValue={selectedData.y} />
+                                                defaultValue={selectedData.y} />
                                         </div>
                                         <div className='form-entry view-data-entry'>
                                             <label>K</label>
                                             <input name='k' type='date' placeholder='K'
-                                            defaultValue={selectedData.k} />
+                                                defaultValue={selectedData.k} />
                                         </div>
                                         <div className='form-entry view-data-entry'>
                                             <label>CMYK</label>
                                             <input name='cmyk' type='date' placeholder='C'
-                                            defaultValue={selectedData.cmyk} />
+                                                defaultValue={selectedData.cmyk} />
                                         </div>
                                     </>
                                 )}
@@ -135,7 +135,7 @@ export const ViewData = ({ setViewData, selectedData, departamentos }) => {
                                 <div className='view-data-buttons'>
                                     <input className='update-button' type='submit' value='Actualizar' />
 
-                                    <input className='update-button' type='submit' value='Eliminar' />
+                                    <input className='delete-button' type='submit' value='Eliminar' />
                                 </div>
                             </form>
 
