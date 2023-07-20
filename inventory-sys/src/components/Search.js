@@ -67,8 +67,6 @@ export const Search = ({ setColumnsState, setTableState, setDataState, deptData,
         }
 
         setDataState(filtData)
-        console.log(filtData)
-
     }
 
     const columnFilter = (e) => {
@@ -81,8 +79,14 @@ export const Search = ({ setColumnsState, setTableState, setDataState, deptData,
     }
 
     const changeDept = (e) => {
-        console.log(e.target.value);
-        setDepartamentoState(e.target.value);
+        // Busqueda necesaria por el cambio de key en los values del select de departamentos
+        const deptoId = e.target.value;
+        if (deptoId != 'departamentos') {
+            const depto = departamentos.find(obj => obj.departamentoId == deptoId)
+            setDepartamentoState(depto['nombre']);
+        }else{
+            setDepartamentoState(deptoId)
+        }
     }
     return (
         <>
