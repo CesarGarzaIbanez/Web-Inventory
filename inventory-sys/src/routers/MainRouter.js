@@ -7,9 +7,6 @@ import { Users } from '../components/Users'
 import DTIsvg from '../helpers/DTIsvg';
 import { useEffect, useState } from "react";
 
-
-
-
 export const MainRouter = () => {
 
   const [computadoras, setComputadoras] = useState();
@@ -20,6 +17,7 @@ export const MainRouter = () => {
   const [equipos, setEquipos] = useState();
   const [departamentos, setDepartamentos] = useState([]);
 
+  // Llamada a funciones de peticiones GET para cargar la base de datos al empezar la aplicación
   useEffect(() => {
     getComputadoras();
     getAccesspoints();
@@ -30,11 +28,13 @@ export const MainRouter = () => {
     getDepartamentos();
   }, []);
 
+  // Quitar los arrays internos de departamento de las tablas que no son la tabla equipo
   const eraseDepto = (data) => {
     const eresedData = data.map(({ departamento: { nombre: departamento }, ...rest }) => ({ ...rest, departamento }))
     return eresedData
   }
 
+  // De la tabla de equipos quitarle los arrays internos que contenia y pasarlos a un dato mas
   const transformarDatos = (equipos) => {
     const equiposTransformados = equipos.map((equipo) => {
       const monitoresActivos = equipo.monitores.map((monitor) => monitor.activo).join(',');
@@ -56,6 +56,7 @@ export const MainRouter = () => {
     return equiposTransformados;
   }
 
+  // Peticiones GET
   const getDepartamentos = async () => {
     try {
       const response = await fetch('https://localhost:7271/api/Departamentos', {
@@ -85,7 +86,6 @@ export const MainRouter = () => {
       console.log(error)
     }
   }
-
 
   const getAccesspoints = async () => {
     try {
@@ -183,7 +183,10 @@ export const MainRouter = () => {
       <main className="content">
 
         <Routes>
-          <Route path='/actualizar' element={<Create />} />
+          <Route path='/actualizar' element={<Create
+            departamentos={departamentos}
+            computadoras={computadoras}
+            monitores={monitores} />} />
           <Route path='/anadir-usuario' element={<CreateUser />} />
           <Route path='/usuarios' element={<Users />} />
           <Route path='/tabla' element={<Table

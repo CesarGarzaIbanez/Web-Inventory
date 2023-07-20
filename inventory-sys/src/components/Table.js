@@ -1,25 +1,23 @@
 import React, { useEffect } from 'react'
 import DataTable from 'react-data-table-component'
-import { columns, data } from '../helpers/tables.js'
+import { columns } from '../helpers/tables.js'
 import { useState } from "react";
 import { Search } from './Search.js';
 
 export const Table = ({ computadoras, accesspoints, monitores, impresoras, generales, equipos, departamentos }) => {
 
   const [columnsState, setColumnsState] = useState(columns[0])
-  const [tableState, setTableState] = useState('PC');
+  const [tableState, setTableState] = useState('EQUIPO');
   const [deptData, setDeptData] = useState([]);
   const [dataState, setDataState] = useState(deptData);
-  const [shownData, setShownData] = useState(dataState);
   // Seleccionar al dar click en la fila
   const [selectedData, setSelectedData] = useState();
 
 
   useEffect(() => {
     setDataState(deptData)
-    setShownData(dataState)
     changeTableData();
-  }, [tableState,deptData,dataState]);
+  }, [tableState,deptData]);
   // Escuchar por los cambios dentro de los padres 
 
   if (equipos && !deptData) {
@@ -28,7 +26,7 @@ export const Table = ({ computadoras, accesspoints, monitores, impresoras, gener
   
   const changeTableData = () => {
     switch (tableState) {
-      case "PC":
+      case "EQUIPO":
         setDeptData(equipos);
         break;
       case "COMPUTADORAS":
@@ -123,7 +121,6 @@ export const Table = ({ computadoras, accesspoints, monitores, impresoras, gener
           setTableState={setTableState}
           setDataState={setDataState}
           setDeptData={setDeptData}
-          setShownData={setShownData}
           deptData={deptData}
           dataState={dataState}
           departamentos={departamentos}
@@ -135,7 +132,7 @@ export const Table = ({ computadoras, accesspoints, monitores, impresoras, gener
         fixedHeader
         className='dataTable'
         columns={columnsState}
-        data={shownData}
+        data={dataState}
         onRowClicked={handleChange}
         customStyles={customStyles}
         pagination

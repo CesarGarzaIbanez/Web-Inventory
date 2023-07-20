@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { columns, data } from '../helpers/tables.js'
 
-export const Search = ({ setColumnsState, setTableState, setDataState, setShownData, deptData, dataState, departamentos }) => {
-    const [tableName, setTableName] = useState('pc')
+export const Search = ({ setColumnsState, setTableState, setDataState, deptData, dataState, departamentos }) => {
+    const [tableName, setTableName] = useState('equipo')
     const [columnName, setColumnName] = useState('tipo')
     const [search, setSearch] = useState('');
     const [departamentoState, setDepartamentoState] = useState('departamentos');
 
     useEffect(() => {
         filterData(search);
-        filterDepto(departamentoState);
     }, [columnName, search, departamentoState]);
-
-
-
 
     // Leer el evento de cambio de tipo de tabla que se necesita
     const changeTable = (e) => {
@@ -24,10 +20,9 @@ export const Search = ({ setColumnsState, setTableState, setDataState, setShownD
     }
 
     // Elegir que array con el nombre de columnas va a consumir
-
     const filterTable = (table) => {
         switch (table) {
-            case 'pc':
+            case 'equipo':
                 setColumnsState(columns[0]);
                 break;
             case 'computadoras':
@@ -53,18 +48,29 @@ export const Search = ({ setColumnsState, setTableState, setDataState, setShownD
     }
 
     // Filtrar los datos segun la entrada dentro de la barra de busqueda
-
     const filterData = (search) => {
-        if (deptData.some(item => item[columnName])) {
-            setDataState(deptData.filter(item => item[columnName].toString().toLowerCase().includes(search.toLowerCase())))
+        let filtData = dataState;
+        if (departamentoState == "departamentos") {
+            if (deptData.some(item => item[columnName])) {
+                filtData = (deptData.filter(item => item[columnName].toString().toLowerCase().includes(search.toLowerCase())))
+            }
         }
-        // console.log(dataState)
+
+        if (departamentoState != "departamentos" && !search) {
+            filtData = (deptData.filter(item => item['departamento'].toLowerCase() == (departamentoState.toLowerCase())))
+        }
+
+        if (departamentoState != "departamentos" && search) {
+            filtData = (deptData.filter(item => item['departamento'].toLowerCase() == (departamentoState.toLowerCase())))
+
+            filtData = (filtData.filter(item => item[columnName].toString().toLowerCase().includes(search.toLowerCase())))
+        }
+
+        setDataState(filtData)
+        console.log(filtData)
 
     }
-    const filterDepto = (depto) => {
-        setDataState(deptData.filter(item => item['departamento'].toLowerCase() == (depto.toLowerCase())))
-    }
-    // Establecer la columna con la que se va a trabajar
+
     const columnFilter = (e) => {
         setColumnName(e.target.value);
     }
@@ -84,7 +90,7 @@ export const Search = ({ setColumnsState, setTableState, setDataState, setShownD
             {/* Lista de los elementos */}
             <div className='lists'>
                 <select onChange={changeTable} className='type-list'>
-                    <option value='pc'>PC</option>
+                    <option value='equipo'>Equipos</option>
                     <option value='computadoras'>Computadoras</option>
                     <option value='monitores'>Monitores</option>
                     <option value='impresoras'>Impresoras</option>
@@ -96,11 +102,13 @@ export const Search = ({ setColumnsState, setTableState, setDataState, setShownD
 
                 <select onChange={changeDept} className='loc-list'>
                     <option value='departamentos'>Todos los departamentos</option>
-                    {departamentos.map((dept) => (
-                        <option key={dept.departamentoId} value={dept.nombre}>
-                            {dept.nombre}
-                        </option>
-                    ))}
+                    {departamentos
+                        .sort((a, b) => a.nombre.localeCompare(b.nombre)) // Ordenar por dept.nombre
+                        .map((dept) => (
+                            <option key={dept.departamentoId} value={dept.departamentoId}>
+                                {dept.nombre}
+                            </option>
+                        ))}
                 </select>
             </div>
 
@@ -111,11 +119,11 @@ export const Search = ({ setColumnsState, setTableState, setDataState, setShownD
 
                 <select onChange={columnFilter} className='filter-list'>
                     <option value="tipo">Tipo</option>
-                    {tableName === 'pc' ? (<>
-                        <option value="pc">PC</option>
-                        <option value="monitor">Monitor</option>
+                    {tableName === 'equipo' ? (<>
+                        <option value="activoComp">Computadora</option>
+                        <option value="activoMon">Monitor</option>
                     </>) : null}
-                    {tableName !== 'pc' ? (
+                    {tableName !== 'equipo' ? (
                         <>
                             <option value="marca">Marca</option>
                             <option value="modelo">Modelo</option>
@@ -138,6 +146,7 @@ export const Search = ({ setColumnsState, setTableState, setDataState, setShownD
                             <option value="ram">RAM</option>
                             <option value="almacenamiento">Almacenamiento</option>
                             <option value="disco">Disco</option>
+                            <option value="ip">IP</option>
                         </>) : null}
                     {tableName === 'monitores' ? (
                         <>
@@ -153,7 +162,7 @@ export const Search = ({ setColumnsState, setTableState, setDataState, setShownD
                         <option value="caracteristicas">Caracteristicas</option>
                     </>) : null}
 
-                    {tableName !== 'pc' ? (
+                    {tableName !== 'equipo' ? (
                         <>
                             <option value="serie">Serie</option>
                             <option value="activo">Activo</option>
