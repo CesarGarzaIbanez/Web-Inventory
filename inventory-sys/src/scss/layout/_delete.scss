@@ -1,0 +1,64 @@
+.delete-container {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(242, 0, 0, 0.122);
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.delete-info-container {
+    position: absolute;
+    border: 1.5px solid black;
+    border-radius: 20px;
+    background-color: $gris;
+    top: 80px;
+    left: 500px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+        color: black;
+        font-size: 16px;
+    }
+}
+
+.delete-buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.delete-button,
+.keep-button {
+    color: $blanco;
+    border: 1px solid black;
+    border-radius: 8px;
+    font-size: 20px;
+    margin-top: 30px;
+    font-weight: bold;
+    // padding: 2px 12px;
+    width: 120px;
+
+
+}
+
+.delete-button {
+    background-color: $rojo;
+    &:hover {
+        transition: 0.3s;
+        background-color: #fc2424;
+    }
+}
+
+.keep-button{
+    background-color: $colorPrincipal;
+
+    &:hover{
+        transition: 0.3s;
+        background-color: #00409a;
+    }
+}

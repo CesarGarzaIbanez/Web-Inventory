@@ -10,7 +10,7 @@
 .info-container{
     position: absolute;
     border-radius: 8px;
-    border: 1px solid black;
+    border: 1.5px solid black;
     background-color: $gris;
     top: 120px;
     left: 560px;
@@ -77,22 +77,3 @@
     justify-content: space-between;
 }
 
-
-.delete-button {
-    background-color: $rojo;
-    color: $blanco;
-    border: 1px solid black;
-    border-radius: 8px;
-    font-size: 20px;
-    margin-top: 30px;
-    font-weight: bold;
-    padding: 2px 12px;
-    width: 120px;
-
-    &:hover{
-    transition: 0.3s;
-    color: $blanco;
-    background-color:#fc2424;
-
-    }
-}

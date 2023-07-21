@@ -114,7 +114,10 @@ export const Table = ({ computadoras, accesspoints, monitores, impresoras, gener
       {viewData && <ViewData
       setViewData={setViewData}
       selectedData={selectedData}
-      departamentos={departamentos}/>}
+      departamentos={departamentos}
+      tableState={tableState}
+      computadoras={computadoras}
+      monitores={monitores}/>}
 
       <section className="searchBar">
         <Search

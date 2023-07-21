@@ -27,7 +27,6 @@ export const MainRouter = () => {
     getEquipos();
     getDepartamentos();
   }, []);
-
   // Quitar los arrays internos de departamento de las tablas que no son la tabla equipo
   const eraseDepto = (data) => {
     const eresedData = data.map(({ departamento: { nombre: departamento }, ...rest }) => ({ ...rest, departamento }))
@@ -49,7 +48,8 @@ export const MainRouter = () => {
         activoComp,
         activoMon: monitoresActivos,
         tipo: equipo.tipo,
-        area: equipo.area
+        area: equipo.area,
+        departamentoId:equipo.departamentoId
       };
     });
 

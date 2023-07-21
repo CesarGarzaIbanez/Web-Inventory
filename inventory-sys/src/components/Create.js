@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export const Create = ({ departamentos, computadoras, monitores }) => {
 
@@ -15,6 +16,8 @@ export const Create = ({ departamentos, computadoras, monitores }) => {
     }
     changeFetchUrl();
   }, [category])
+
+  const navigate = useNavigate();
 
   // URL a la que se hara la petición POST dependiente de la categoria
   const changeFetchUrl = () => {
@@ -54,8 +57,8 @@ export const Create = ({ departamentos, computadoras, monitores }) => {
       if (!response.ok) {
         throw new Error('Error en la solicitud');
       }
-      const responseData = await response;
-      console.log(responseData)
+      // Recargar la pagina y redireccionar a tabla
+      window.location.reload(navigate('/tabla'));
     } catch (error) {
       console.log(error)
     }
@@ -93,10 +96,25 @@ export const Create = ({ departamentos, computadoras, monitores }) => {
       case 'impresora':
         formValues.tinta = data.tinta.value;
         formValues.c = data.c.value;
+        if (formValues.c == "") {
+          delete formValues.c
+        }
         formValues.m = data.m.value;
+        if (formValues.m == "") {
+          delete formValues.m
+        }
         formValues.y = data.y.value;
+        if (formValues.y == "") {
+          delete formValues.y
+        }
         formValues.k = data.k.value;
+        if (formValues.k == "") {
+          delete formValues.k
+        }
         formValues.cmyk = data.cmyk.value;
+        if (formValues.cmyk == "") {
+          delete formValues.cmyk
+        }
         break;
       case 'computadora':
         formValues.cpu = data.cpu.value;
@@ -117,7 +135,7 @@ export const Create = ({ departamentos, computadoras, monitores }) => {
   }
 
   // Transformación del objeto enviado al POST de equipo donde se busca por medio del activo para obtener los ids
-  const postEquipo = (formValues) => {
+  const preparePostEquipo = (formValues) => {
     if (computadoras) {
       const objeto = computadoras.find(obj => obj.activo == formValues.activoComputadora);
       if (objeto) {
@@ -148,9 +166,8 @@ export const Create = ({ departamentos, computadoras, monitores }) => {
     let data = e.target;
     let formValues = defineDataStructure(data)
     if (category === 'equipo') {
-      postEquipo(formValues);
+      preparePostEquipo(formValues);
     }
-    console.log(formValues);
     postData(formValues)
   };
 
