@@ -27,7 +27,7 @@ export const Delete = ({ selectedData, setDeleteState, fetchUrl }) => {
       if (!response.ok) {
         throw new Error('Error en la solicitud');
       }
-      window.location.reload();
+      window.location.href = "/";
     } catch (error) {
       console.log(error)
     }

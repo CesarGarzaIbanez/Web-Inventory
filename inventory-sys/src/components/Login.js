@@ -36,7 +36,7 @@ export const Login = ({handleLogin}) => {
             console.log("Hurray")
             localStorage.setItem('token', res)
             handleLogin(res)
-            window.location.href = "/tabla"
+            window.location.href = "/"
           } catch (error) {
             setError(true)
             console.error('Error al decodificar el token:', error);

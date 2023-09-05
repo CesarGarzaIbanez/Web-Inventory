@@ -66,7 +66,7 @@ export const Create = ({ departamentos, computadoras, monitores }) => {
         throw new Error('Error en la solicitud');
       }
       // Recargar la pagina y redireccionar a tabla
-      window.location.reload(navigate('/tabla'));
+      window.location.href = "/"
     } catch (error) {
       console.log(error)
     }

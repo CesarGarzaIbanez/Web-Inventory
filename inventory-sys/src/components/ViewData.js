@@ -78,7 +78,7 @@ export const ViewData = ({ setViewData, selectedData, departamentos, tableState,
                 throw new Error('Error en la solicitud');
             }
             const responseData = await response;
-            window.location.reload();
+            window.location.href = "/"
             console.log(responseData)
         } catch (error) {
             console.log(error)

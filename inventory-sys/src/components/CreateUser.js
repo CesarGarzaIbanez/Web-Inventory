@@ -44,7 +44,7 @@ export const CreateUser = () => {
                 throw new Error('Error en la solicitud');
             }
             // Recargar la pagina y redireccionar a tabla
-            window.location.reload(navigate('/usuarios'));
+            window.location.href = "/"
         } catch (error) {
             console.log(error)
         }
