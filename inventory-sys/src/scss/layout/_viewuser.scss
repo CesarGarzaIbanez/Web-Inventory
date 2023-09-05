@@ -1,0 +1,56 @@
+.view-user-data-container{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0,0, 0.4);
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.view-user-data{
+    position: absolute;
+    border-radius: 8px;
+    border: 1.5px solid black;
+    background-color: $gris;
+    top: 120px;
+    left: 40rem;
+    z-index: 3; 
+    padding: 2rem;
+
+    p{
+        font-size: 20px;
+    }
+    span{
+        font-weight: 700;
+    }
+}
+
+.delete-user-container{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(242, 0, 0, 0.122);
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.delete-user{
+    position: absolute;
+    border-radius: 8px;
+    border: 1.5px solid black;
+    background-color: $gris;
+    top: 12rem;
+    left: 31rem;
+    z-index: 20; 
+    padding: 2rem;
+    p{
+        font-weight: 700;
+    }
+}
+.user-delete-buttons{
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}

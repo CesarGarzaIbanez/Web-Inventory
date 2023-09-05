@@ -7,7 +7,7 @@ import { Users } from '../components/Users'
 import DTIsvg from '../helpers/DTIsvg';
 import { useEffect, useState } from "react";
 
-export const MainRouter = () => {
+export const MainRouter = ({ handleLogout }) => {
 
   const [computadoras, setComputadoras] = useState();
   const [accesspoints, setAccesspoints] = useState();
@@ -27,6 +27,9 @@ export const MainRouter = () => {
     getEquipos();
     getDepartamentos();
   }, []);
+
+  
+
   // Quitar los arrays internos de departamento de las tablas que no son la tabla equipo
   const eraseDepto = (data) => {
     const eresedData = data.map(({ departamento: { nombre: departamento }, ...rest }) => ({ ...rest, departamento }))
@@ -49,7 +52,7 @@ export const MainRouter = () => {
         activoMon: monitoresActivos,
         tipo: equipo.tipo,
         area: equipo.area,
-        departamentoId:equipo.departamentoId
+        departamentoId: equipo.departamentoId
       };
     });
 
@@ -59,10 +62,18 @@ export const MainRouter = () => {
   // Peticiones GET
   const getDepartamentos = async () => {
     try {
-      const response = await fetch('https://localhost:7271/api/Departamentos', {
+      const token = localStorage.getItem('token');
+
+      // Verificar si el token existe antes de usarlo
+      if (!token) {
+        console.error('Token no encontrado en el localStorage');
+        return;
+      }
+      const response = await fetch('https://webappinventory.azurewebsites.net/api/Departamentos', {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         }
       });
       const data = await response.json();
@@ -74,10 +85,18 @@ export const MainRouter = () => {
 
   const getComputadoras = async () => {
     try {
-      const response = await fetch('https://localhost:7271/api/Computadoras', {
+      const token = localStorage.getItem('token');
+
+      // Verificar si el token existe antes de usarlo
+      if (!token) {
+        console.error('Token no encontrado en el localStorage');
+        return;
+      }
+      const response = await fetch('https://webappinventory.azurewebsites.net/api/Computadoras', {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         }
       });
       const data = await response.json();
@@ -89,10 +108,18 @@ export const MainRouter = () => {
 
   const getAccesspoints = async () => {
     try {
-      const response = await fetch('https://localhost:7271/api/Accesspoints', {
+      const token = localStorage.getItem('token');
+
+      // Verificar si el token existe antes de usarlo
+      if (!token) {
+        console.error('Token no encontrado en el localStorage');
+        return;
+      }
+      const response = await fetch('https://webappinventory.azurewebsites.net/api/Accesspoints', {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         }
       });
       const data = await response.json();
@@ -104,10 +131,18 @@ export const MainRouter = () => {
 
   const getMonitores = async () => {
     try {
-      const response = await fetch('https://localhost:7271/api/Monitores', {
+      const token = localStorage.getItem('token');
+
+      // Verificar si el token existe antes de usarlo
+      if (!token) {
+        console.error('Token no encontrado en el localStorage');
+        return;
+      }
+      const response = await fetch('https://webappinventory.azurewebsites.net/api/Monitores', {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         }
       });
       const data = await response.json();
@@ -119,10 +154,18 @@ export const MainRouter = () => {
 
   const getImpresoras = async () => {
     try {
-      const response = await fetch('https://localhost:7271/api/Impresoras', {
+      const token = localStorage.getItem('token');
+
+      // Verificar si el token existe antes de usarlo
+      if (!token) {
+        console.error('Token no encontrado en el localStorage');
+        return;
+      }
+      const response = await fetch('https://webappinventory.azurewebsites.net/api/Impresoras', {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         }
       });
       const data = await response.json();
@@ -134,10 +177,18 @@ export const MainRouter = () => {
 
   const getGenerales = async () => {
     try {
-      const response = await fetch('https://localhost:7271/api/Generales', {
+      const token = localStorage.getItem('token');
+
+      // Verificar si el token existe antes de usarlo
+      if (!token) {
+        console.error('Token no encontrado en el localStorage');
+        return;
+      }
+      const response = await fetch('https://webappinventory.azurewebsites.net/api/Generales', {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         }
       });
       const data = await response.json();
@@ -149,11 +200,19 @@ export const MainRouter = () => {
 
   const getEquipos = async () => {
     try {
-      const response = await fetch('https://localhost:7271/api/Equipos',
+      const token = localStorage.getItem('token');
+
+      // Verificar si el token existe antes de usarlo
+      if (!token) {
+        console.error('Token no encontrado en el localStorage');
+        return;
+      }
+      const response = await fetch('https://webappinventory.azurewebsites.net/api/Equipos',
         {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           }
         });
       const data = await response.json();
@@ -174,7 +233,7 @@ export const MainRouter = () => {
             <li><NavLink to="/tabla">Tabla</NavLink></li>
             <li> <NavLink to="/anadir-usuario">Añadir usuario</NavLink></li>
             <li> <NavLink to="/usuarios">Usuarios</NavLink></li>
-            <li><NavLink to="/tabla">Cerrar Sesión</NavLink></li>
+            <li><a onClick={handleLogout}>Cerrar Sesión</a></li>
           </ul>
         </nav>
       </header>

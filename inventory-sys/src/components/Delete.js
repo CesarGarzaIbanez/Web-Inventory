@@ -9,11 +9,19 @@ export const Delete = ({ selectedData, setDeleteState, fetchUrl }) => {
 
 
   const deleteData = async () => {
-    try {
+      try {
+        const token = localStorage.getItem('token');
+  
+        // Verificar si el token existe antes de usarlo
+        if (!token) {
+          console.error('Token no encontrado en el localStorage');
+          return;
+        }
       const response = await fetch(fetchUrl, {
         method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
       });
       if (!response.ok) {

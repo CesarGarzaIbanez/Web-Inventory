@@ -17,7 +17,7 @@ export const ViewData = ({ setViewData, selectedData, departamentos, tableState,
     }
     // Cambiar los fetchs, agregada la funcionalidad de escuchar por el delete para adecuar los url a ese fetch
     const changeFetchUrl = () => {
-        const databaseURL = 'https://localhost:7271/api/';
+        const databaseURL = 'https://webappinventory.azurewebsites.net/api/';
 
         switch (tableState) {
             case 'EQUIPO':
@@ -59,10 +59,18 @@ export const ViewData = ({ setViewData, selectedData, departamentos, tableState,
     // Peticion PUT
     const putData = async (data) => {
         try {
+        const token = localStorage.getItem('token');
+
+        // Verificar si el token existe antes de usarlo
+        if (!token) {
+          console.error('Token no encontrado en el localStorage');
+          return;
+        }
             const response = await fetch(fetchUrl, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(data),
             });

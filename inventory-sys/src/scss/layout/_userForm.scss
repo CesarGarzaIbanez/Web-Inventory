@@ -10,4 +10,12 @@
     max-width: auto;
 
     border: 1.2px solid black;
+    .type-input,.type-select{
+        input{
+            width: 15rem;
+        }
+        select{
+            width: 15rem;
+        }
+    }
 }

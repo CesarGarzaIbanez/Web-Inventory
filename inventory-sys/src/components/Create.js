@@ -21,7 +21,7 @@ export const Create = ({ departamentos, computadoras, monitores }) => {
 
   // URL a la que se hara la petición POST dependiente de la categoria
   const changeFetchUrl = () => {
-    const databaseURL = 'https://localhost:7271/api/';
+    const databaseURL = 'https://webappinventory.azurewebsites.net/api/';
 
     switch (category) {
       case 'equipo':
@@ -47,10 +47,18 @@ export const Create = ({ departamentos, computadoras, monitores }) => {
   // Peticion POST
   const postData = async (data) => {
     try {
+      const token = localStorage.getItem('token');
+
+      // Verificar si el token existe antes de usarlo
+      if (!token) {
+        console.error('Token no encontrado en el localStorage');
+        return;
+      }
       const response = await fetch(fetchUrl, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(data),
       });
